@@ -9,24 +9,24 @@ const doors = document.querySelectorAll('.door');
 // Initialize doors based on current date
 doors.forEach(door => {
     const day = parseInt(door.dataset.day);
-    
+
     // Check if this door can be opened
     // Only allow opening if it's December and the day has arrived
-    let canOpen = (currentMonth === 12 && day <= currentDay) || 
+    let canOpen = (currentMonth === 12 && day <= currentDay) ||
                     (currentMonth > 12); // Allow all doors to open after December
-    canOpen = true;
-    
+    // canOpen = true;
+
     // Check if door was previously opened (stored in localStorage)
     const isOpened = localStorage.getItem(`door-${day}`) === 'opened';
-    
+
     if (isOpened) {
         door.classList.add('opened');
     }
-    
+
     if (!canOpen) {
         door.classList.add('locked');
     }
-    
+
     // Add click event listener
     door.addEventListener('click', () => {
         if (!canOpen) {
@@ -34,16 +34,16 @@ doors.forEach(door => {
             showMessage(`Door ${day} can only be opened on December ${day}!`);
             return;
         }
-        
+
         if (!door.classList.contains('opened')) {
             door.classList.add('opened');
             localStorage.setItem(`door-${day}`, 'opened');
-            
+
             // Play a subtle sound effect (optional - would need audio file)
             // new Audio('open.mp3').play();
         }
     });
-    
+
     // Add click event to images for lightbox
     const doorImage = door.querySelector('.door-back img');
     if (doorImage) {
@@ -61,11 +61,11 @@ function openLightbox(imageSrc, caption) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxCaption = document.getElementById('lightbox-caption');
-    
+
     lightboxImage.src = imageSrc;
     lightboxCaption.textContent = caption;
     lightbox.style.display = 'block';
-    
+
     // Prevent body scrolling when lightbox is open
     document.body.style.overflow = 'hidden';
 }
@@ -73,7 +73,7 @@ function openLightbox(imageSrc, caption) {
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
     lightbox.style.display = 'none';
-    
+
     // Restore body scrolling
     document.body.style.overflow = 'auto';
 }
@@ -101,7 +101,7 @@ function showMessage(text) {
     if (existingMsg) {
         existingMsg.remove();
     }
-    
+
     const message = document.createElement('div');
     message.className = 'temp-message';
     message.textContent = text;
@@ -119,9 +119,9 @@ function showMessage(text) {
         border: 2px solid #ffd700;
         box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
     `;
-    
+
     document.body.appendChild(message);
-    
+
     setTimeout(() => {
         message.style.transition = 'opacity 0.5s';
         message.style.opacity = '0';
@@ -131,7 +131,7 @@ function showMessage(text) {
 
 // Optional: Add a reset button for testing (remove in production)
 // Uncomment the following lines if you want a reset button during development
-/*
+
 const resetBtn = document.createElement('button');
 resetBtn.textContent = 'Reset Calendar (Dev Only)';
 resetBtn.style.cssText = `
@@ -151,4 +151,3 @@ resetBtn.addEventListener('click', () => {
     location.reload();
 });
 document.body.appendChild(resetBtn);
-*/
