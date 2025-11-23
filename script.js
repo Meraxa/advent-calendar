@@ -3,6 +3,34 @@ const today = new Date();
 const currentDay = today.getDate();
 const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
 
+// Load text data for each day
+const dayTexts = {
+    1: "Specific text for day 1.",
+    2: "Specific text for day 2.",
+    3: "Specific text for day 3.",
+    4: "Specific text for day 4.",
+    5: "Specific text for day 5.",
+    6: "Specific text for day 6.",
+    7: "Specific text for day 7.",
+    8: "Specific text for day 8.",
+    9: "Specific text for day 9.",
+    10: "Specific text for day 10.",
+    11: "Specific text for day 11.",
+    12: "Specific text for day 12.",
+    13: "Specific text for day 13.",
+    14: "Specific text for day 14.",
+    15: "Specific text for day 15.",
+    16: "Specific text for day 16.",
+    17: "Specific text for day 17.",
+    18: "Specific text for day 18.",
+    19: "Specific text for day 19.",
+    20: "Specific text for day 20.",
+    21: "Specific text for day 21.",
+    22: "Specific text for day 22.",
+    23: "Specific text for day 23.",
+    24: "Specific text for day 24."
+};
+
 // Get all doors
 const doors = document.querySelectorAll('.door');
 
@@ -14,7 +42,8 @@ doors.forEach(door => {
     // Only allow opening if it's December and the day has arrived
     let canOpen = (currentMonth === 12 && day <= currentDay) ||
                     (currentMonth > 12); // Allow all doors to open after December
-    // canOpen = true;
+
+    canOpen = true; // For testing purposes, allow all doors to be opened
 
     // Check if door was previously opened (stored in localStorage)
     const isOpened = localStorage.getItem(`door-${day}`) === 'opened';
@@ -50,20 +79,26 @@ doors.forEach(door => {
         doorImage.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent door click event
             if (door.classList.contains('opened')) {
-                openLightbox(doorImage.src, `Day ${day}`);
+                openLightbox(doorImage.src, `Day ${day}`, day);
             }
         });
     }
 });
 
 // Lightbox functionality
-function openLightbox(imageSrc, caption) {
+function openLightbox(imageSrc, caption, day) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxDayText = document.getElementById('lightbox-text'); // Use existing element
 
     lightboxImage.src = imageSrc;
     lightboxCaption.textContent = caption;
+
+    // Update the text for the day
+    const dayText = dayTexts[day] || "No text available for this day.";
+    lightboxDayText.textContent = dayText;
+
     lightbox.style.display = 'block';
 
     // Prevent body scrolling when lightbox is open
