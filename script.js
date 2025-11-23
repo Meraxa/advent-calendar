@@ -43,7 +43,7 @@ doors.forEach(door => {
     let canOpen = (currentMonth === 12 && day <= currentDay) ||
                     (currentMonth > 12); // Allow all doors to open after December
 
-    canOpen = true; // For testing purposes, allow all doors to be opened
+    // canOpen = true; // For testing purposes, allow all doors to be opened
 
     // Check if door was previously opened (stored in localStorage)
     const isOpened = localStorage.getItem(`door-${day}`) === 'opened';
@@ -167,22 +167,22 @@ function showMessage(text) {
 // Optional: Add a reset button for testing (remove in production)
 // Uncomment the following lines if you want a reset button during development
 
-const resetBtn = document.createElement('button');
-resetBtn.textContent = 'Reset Calendar (Dev Only)';
-resetBtn.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background: #c41e1e;
-    color: white;
-    border: 2px solid #ffd700;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1000;
-`;
-resetBtn.addEventListener('click', () => {
-    localStorage.clear();
-    location.reload();
-});
-document.body.appendChild(resetBtn);
+// const resetBtn = document.createElement('button');
+// resetBtn.textContent = 'Reset Calendar (Dev Only)';
+// resetBtn.style.cssText = `
+//     position: fixed;
+//     bottom: 20px;
+//     right: 20px;
+//     padding: 10px 20px;
+//     background: #c41e1e;
+//     color: white;
+//     border: 2px solid #ffd700;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     z-index: 1000;
+// `;
+// resetBtn.addEventListener('click', () => {
+//     localStorage.clear();
+//     location.reload();
+// });
+// document.body.appendChild(resetBtn);
