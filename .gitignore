@@ -1,3 +1,5 @@
-images/*.png
-images/*.txt
-images/*.jpg
+content/*.png
+content/*.txt
+content/*.jpg
+content/*.mp3
+content/*.txt

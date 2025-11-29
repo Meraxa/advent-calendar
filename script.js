@@ -164,6 +164,15 @@ function showMessage(text) {
     }, 2000);
 }
 
+// Ensure background audio plays after user interaction
+window.addEventListener('click', () => {
+    const audio = document.getElementById('background-audio');
+    if (audio && audio.paused) {
+        audio.play().catch(err => console.error('Audio playback failed:', err));
+    }
+}, { once: true });
+
+
 // Optional: Add a reset button for testing (remove in production)
 // Uncomment the following lines if you want a reset button during development
 
